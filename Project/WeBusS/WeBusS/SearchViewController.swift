@@ -46,4 +46,29 @@ class SearchViewController: UIViewController, XMLParserDelegate {
         tableViewList!.reloadData()
     }
     
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String]) {
+        
+        if (elementName as NSString).isEqual(to: "row") {
+            elements = NSMutableDictionary()
+            elements = [:]
+            name = NSMutableString()
+            name = ""
+        }
+    }
+    
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        if element.isEqual(to: "STATION_NM_INFO") {
+            name.append(string)
+        }
+    }
+    
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI namespaceURI: String?, qualifiedName qName: String?) {
+        if (elementName as NSString).isEqual(to: "row") {
+            if !name.isEqual( nil) {
+                elements.setObject(name, forKey: "STATION_NM_INFO" as NSCopying)
+            }
+            posts.add(elements)
+        }
+    }
+    
 }
