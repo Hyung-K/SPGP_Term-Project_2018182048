@@ -67,8 +67,8 @@
 				0D14250B264A689D00DED8D5 /* Assets.xcassets */,
 				0D14250D264A689D00DED8D5 /* LaunchScreen.storyboard */,
 				0D142510264A689D00DED8D5 /* Info.plist */,
-				0D142516264E333300DED8D5 /* SearchViewController.swift */,
 				0D39A7EA2657B930007AF486 /* BusInfoViewController.swift */,
+				0D142516264E333300DED8D5 /* SearchViewController.swift */,
 			);
 			path = WeBusS;
 			sourceTree = "<group>";
