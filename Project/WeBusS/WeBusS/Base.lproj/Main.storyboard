@@ -152,7 +152,7 @@
         <!--BusInfo-->
         <scene sceneID="aBm-Mo-cb0">
             <objects>
-                <viewController title="BusInfo" id="o95-IE-Qs5" customClass="BusInfoViewController" customModule="BuNal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="BusInfo" id="o95-IE-Qs5" customClass="BusInfoViewController" customModule="WeBusS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OGK-RH-I1l">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -204,6 +204,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="busListTableView" destination="qXL-w0-KzT" id="489-Nn-uE1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dd2-6J-2mM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="oH9-O0-KN2" userLabel="Exit" sceneMemberID="exit"/>

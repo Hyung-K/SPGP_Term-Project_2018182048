@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, XMLParserDelegate, UITableViewDataSource {
+class SearchViewController: UIViewController, XMLParserDelegate, UITableViewDataSource, UITableViewDelegate {
     
     var parser = XMLParser()
     var posts = NSMutableArray()
@@ -15,6 +15,7 @@ class SearchViewController: UIViewController, XMLParserDelegate, UITableViewData
     var element = NSString()
     var stationName = NSMutableString()
     var SiName = NSMutableString()
+    var stationId = NSMutableString()
     
     @IBOutlet weak var categoryChooseControl: UISegmentedControl!
     @IBOutlet weak var micButton: UIButton!
@@ -23,33 +24,43 @@ class SearchViewController: UIViewController, XMLParserDelegate, UITableViewData
     @IBOutlet weak var searchTextField: UITextField!
     
     @IBAction func categoryChooseAction(_ sender: Any) {
+        let index = categoryChooseControl.selectedSegmentIndex
+        switch index {
+        case 0:
+            break
+        case 1:
+            break
+        default:
+            break
+        }
     }
     @IBAction func micButtonAction(_ sender: Any) {
     }
     @IBAction func searchBuutonAction(_ sender: Any) {
-        beginXMLFileParsing(name: String(searchTextField.text!))
+        beginXMLFileParsing(parameter: "keyword", value: String(searchTextField.text!))
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        beginXMLFileParsing(name: "강남")
+        beginXMLFileParsing(parameter:"keyword", value: "강남")
     }
 
-    func beginXMLFileParsing(name: String) {
+    func beginXMLFileParsing(parameter: String, value: String) {
         
         let path = "http://openapi.gbis.go.kr/ws/rest/busstationservice?serviceKey=cOXFXk2qE%2FhuIiYcsMQ4gv032heBUTwuP%2FDQwW0TskxrWGtrdVC6bJPNmJ2CbVcFq6P1eirV9X5d5fql75eeRg%3D%3D&keyword="
-        let quaryPath = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let valueEncoding = value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let quaryURL = path + parameter + "=" + valueEncoding
         
         posts = []
 //        parser = XMLParser(contentsOf: (URL(string: "https://openapi.gg.go.kr/BusStation?ServiceKey=6b722c447ca0430db1c15b6c0a08c4dd" ))!)!
-        parser = XMLParser(contentsOf: (URL(string: path + quaryPath ))!)!
+        parser = XMLParser(contentsOf: (URL(string: quaryURL ))!)!
         parser.delegate = self
         
         let success:Bool = parser.parse()
         if success {
-            print("XML Parsing Success!")
+            print("Search XML Parsing Success!")
         } else {
-            print("XML Parsing Fail!!")
+            print("Search XML Parsing Fail!!")
         }
         
         tableViewList!.reloadData()
