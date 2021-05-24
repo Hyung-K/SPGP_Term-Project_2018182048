@@ -26,6 +26,7 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        beginXMLFileParsing(parameter: "stationId", value: stationID)
     }
     
     func beginXMLFileParsing(parameter: String, value: NSMutableString) {
@@ -67,7 +68,7 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
         }
     }
     
-    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI namespaceURI: String?, qualifiedName qName: String?) {
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI namepaceURI: String?, qualifiedName qName: String?) {
         if (elementName as NSString).isEqual(to: "busRouteList") {
             if !routeName.isEqual(nil) {
                 elements.setObject(routeName, forKey: "routeName" as NSCopying)

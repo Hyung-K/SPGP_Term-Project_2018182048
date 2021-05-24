@@ -34,8 +34,10 @@ class SearchViewController: UIViewController, XMLParserDelegate, UITableViewData
             break
         }
     }
+    
     @IBAction func micButtonAction(_ sender: Any) {
     }
+    
     @IBAction func searchBuutonAction(_ sender: Any) {
         beginXMLFileParsing(parameter: "keyword", value: String(searchTextField.text!))
     }
@@ -44,10 +46,20 @@ class SearchViewController: UIViewController, XMLParserDelegate, UITableViewData
         super.viewDidLoad()
         beginXMLFileParsing(parameter:"keyword", value: "강남")
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let secondViewController = segue.destination as? BusInfoViewController else {
+            return
+        }
+        let cell = sender as! UITableViewCell
+        let indexPath = self.tableViewList.indexPath(for: cell)
+        
+        secondViewController.stationID = (posts.object(at: indexPath!.row) as AnyObject).value(forKey: "stationID") as! NSString as! NSMutableString
+    }
 
     func beginXMLFileParsing(parameter: String, value: String) {
         
-        let path = "http://openapi.gbis.go.kr/ws/rest/busstationservice?serviceKey=cOXFXk2qE%2FhuIiYcsMQ4gv032heBUTwuP%2FDQwW0TskxrWGtrdVC6bJPNmJ2CbVcFq6P1eirV9X5d5fql75eeRg%3D%3D&keyword="
+        let path = "http://openapi.gbis.go.kr/ws/rest/busstationservice?serviceKey=cOXFXk2qE%2FhuIiYcsMQ4gv032heBUTwuP%2FDQwW0TskxrWGtrdVC6bJPNmJ2CbVcFq6P1eirV9X5d5fql75eeRg%3D%3D&"
         let valueEncoding = value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let quaryURL = path + parameter + "=" + valueEncoding
         
@@ -68,6 +80,8 @@ class SearchViewController: UIViewController, XMLParserDelegate, UITableViewData
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String]) {
         
+        element = elementName as NSString
+        
         if (elementName as NSString).isEqual(to: "busStationList") {
             elements = NSMutableDictionary()
             elements = [:]
@@ -75,6 +89,8 @@ class SearchViewController: UIViewController, XMLParserDelegate, UITableViewData
             stationName = ""
             SiName = NSMutableString()
             SiName = ""
+            stationId = NSMutableString()
+            stationId = ""
         }
     }
     
@@ -84,15 +100,21 @@ class SearchViewController: UIViewController, XMLParserDelegate, UITableViewData
         } else if element.isEqual(to: "regionName") {
             SiName.append(string)
         }
+        else if element.isEqual(to: "stationID") {
+            stationId.append(string)
+        }
     }
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI namspaceURI: String?, qualifiedName qName: String?) {
         if (elementName as NSString).isEqual(to: "busStationList") {
-            if !stationName.isEqual( nil) {
+            if !stationName.isEqual(nil) {
                 elements.setObject(stationName, forKey: "stationName" as NSCopying)
             }
             if !SiName.isEqual(nil) {
                 elements.setObject(SiName, forKey: "regionName" as NSCopying)
+            }
+            if !stationId.isEqual(nil) {
+                elements.setObject(stationId, forKey: "stationID" as NSCopying)
             }
             posts.add(elements)
             print(posts)
@@ -111,5 +133,4 @@ class SearchViewController: UIViewController, XMLParserDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
-    
 }
