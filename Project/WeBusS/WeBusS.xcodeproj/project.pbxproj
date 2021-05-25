@@ -16,6 +16,7 @@
 		0D142517264E333300DED8D5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D142516264E333300DED8D5 /* SearchViewController.swift */; };
 		0D39A7EB2657B930007AF486 /* BusInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D39A7EA2657B930007AF486 /* BusInfoViewController.swift */; };
 		0DF177E8265C16C80053CD75 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF177E7265C16C80053CD75 /* MapViewController.swift */; };
+		0DF177EA265CD9CA0053CD75 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF177E9265CD9CA0053CD75 /* WeatherViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		0D142516264E333300DED8D5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0D39A7EA2657B930007AF486 /* BusInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusInfoViewController.swift; sourceTree = "<group>"; };
 		0DF177E7265C16C80053CD75 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		0DF177E9265CD9CA0053CD75 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				0D39A7EA2657B930007AF486 /* BusInfoViewController.swift */,
 				0D142516264E333300DED8D5 /* SearchViewController.swift */,
 				0DF177E7265C16C80053CD75 /* MapViewController.swift */,
+				0DF177E9265CD9CA0053CD75 /* WeatherViewController.swift */,
 			);
 			path = WeBusS;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 				0DF177E8265C16C80053CD75 /* MapViewController.swift in Sources */,
 				0D39A7EB2657B930007AF486 /* BusInfoViewController.swift in Sources */,
 				0D142503264A689B00DED8D5 /* AppDelegate.swift in Sources */,
+				0DF177EA265CD9CA0053CD75 /* WeatherViewController.swift in Sources */,
 				0D142517264E333300DED8D5 /* SearchViewController.swift in Sources */,
 				0D142505264A689B00DED8D5 /* SceneDelegate.swift in Sources */,
 			);
