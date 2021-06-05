@@ -138,14 +138,32 @@ class WeatherViewController: UIViewController,XMLParserDelegate {
     
     func setWsd(wsd: Double) {
         var desc = ""
-        if wsd < 4.0 {
-            desc = "바람이 약하다"
-        } else if 4.0 <= wsd && wsd < 9.0 {
-            desc = "바람이 약간 강하다"
-        } else if 9.0 <= wsd && wsd < 14.0 {
-            desc = "바람이 강하다"
-        } else if 14.0 <= wsd {
-            desc = "바람이 매우 강하다"
+        if wsd < 0.2 {
+            desc = "고요, 연기가 수직으로 올라가는 정도이다."
+        } else if 0.3 <= wsd && wsd < 1.5 {
+            desc = "실바람, 풍향은 연기 방향으로 알수 있으나 풍향계는 움직이지 않는 정도이다."
+        } else if 1.6 <= wsd && wsd < 3.3 {
+            desc = "남실바람, 바람이 얼굴에 느껴지며 나뭇잎이 흔들리는 정도이다."
+        } else if 3.4 <= wsd && wsd < 5.4 {
+            desc = "산들바람, 나뭇잎과 가는 가지가 끊임없이 흔들리는 정도이다."
+        } else if 5.5 <= wsd && wsd < 7.9 {
+            desc = "건들바람, 먼지가 일고 종잇조각이 날리는 정도이다."
+        } else if 8.0 <= wsd && wsd < 10.7 {
+            desc = "흔들바람, 잎이 무성한 나무가 전체가 흔들리는 정도이다."
+        } else if 10.8 <= wsd && wsd < 13.8 {
+            desc = "된바람, 큰 나뭇가지가 흔들리는 정도이다."
+        } else if 13.9 <= wsd && wsd < 17.1 {
+            desc = "센바람, 나무 전체가 흔들리며, 바람은 안고서 걷기 어려운 정도이다."
+        } else if 17.2 <= wsd && wsd < 20.7 {
+            desc = "큰바람, 작은 나뭇가지가 꺽이며, 바람을 안고서 걸을 수 없을 정도이다."
+        } else if 20.8 <= wsd && wsd < 24.4 {
+            desc = "큰센바람, 가옥에 다소 손해가 있을 정도이다."
+        } else if 24.5 <= wsd && wsd < 28.4 {
+            desc = "노대바람, 내륙지방에선 보기 드문 현상이며 수목이 뿌리채 뽑히는 정도이다."
+        } else if 28.5 <= wsd && wsd < 32.6 {
+            desc = "왕바람, 광범위한 파괴가 일어나는 정도이다."
+        } else if 32.7 <= wsd {
+            desc = "싹쓸바람"
         }
         
         WsdLabel.text = "풍속: \(wsd)m/s - \(desc)"
