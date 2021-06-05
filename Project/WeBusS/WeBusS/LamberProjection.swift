@@ -44,7 +44,7 @@ class LamberProjection
         ro = re * sf / pow(ro, sn)
     }
     
-    func convertGfrid(lon: Double, lat: Double) -> (Int, Int) {
+    func convertGrid(lon: Double, lat: Double) -> (Int, Int) {
         var ra = tan(PI * 0.25 + lat * DEGRAD * 0.5)
         ra = re * sf / pow(ra, sn)
         var theta = lon * DEGRAD - olon
