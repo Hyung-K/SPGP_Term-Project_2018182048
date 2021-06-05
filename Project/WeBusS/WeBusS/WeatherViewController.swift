@@ -46,13 +46,13 @@ class WeatherViewController: UIViewController,XMLParserDelegate {
         currentDate = formatter.string(from: Date())
         
         let (x, y) = converter.convertGrid(lon: locationX.doubleValue, lat: locationY.doubleValue)
-        beginXmlFileParsing(numOfRows: String(104), baseData: String(20200611), baseTime: String(0200), nx: String(x), ny: String(y))
+        beginXmlFileParsing(numOfRows: String(104), baseData: String(20210605), baseTime: String(0500), nx: String(x), ny: String(y))
 
 
     }
     
     func beginXmlFileParsing(numOfRows: String, baseData: String, baseTime: String, nx: String, ny: String) {
-        let path = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst?serviceKey=cOXFXk2qE%2FhuIiYcsMQ4gv032heBUTwuP%2FDQwW0TskxrWGtrdVC6bJPNmJ2CbVcFq6P1eirV9X5d5fql75eeRg%3D%3D&pageNo=1&"
+        let path = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst?serviceKey=B7IRuZ%2BcSX8HxP9UYZakufq8v80iSY9sI1XR%2FCLPm7GIWCZU4U233p2ms4XbXQHgBYHZ%2FgnjXyVqeH6fK8bMeQ%3D%3D&pageNo=1&"
         let quaryURL = path + "numOfRows=" + numOfRows + "&dataType=XML&base_date=" + baseData + "&base_time=" + baseTime + "&nx=" + nx + "&ny="
         
         posts = []
