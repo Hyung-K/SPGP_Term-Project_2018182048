@@ -41,10 +41,18 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let secondViewController = segue.destination as? MapViewController else {
+            guard let weatherViewController = segue.destination as? WeatherViewController else { return }
+            
+            if self.currentCategory == 0 {
+            
+            }
+            return
+        }
+        
         let cell = sender as! UITableViewCell
         let indexPath = self.busListTableView.indexPath(for: cell)
         
-        guard let secondViewController = segue.destination as? MapViewController else {return}
         if currentCategory == 0 {
             secondViewController.locationX = self.locationX
             secondViewController.locationY = self.locationY
