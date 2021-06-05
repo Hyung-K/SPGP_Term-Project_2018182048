@@ -16,6 +16,8 @@ class BusInformationTableViewCell: UITableViewCell {
     @IBOutlet weak var remainSeatCnt: UILabel!
     @IBOutlet weak var busImage: UIImageView!
     @IBOutlet weak var plateNo: UILabel!
+    @IBOutlet weak var remainSeatCnt1: UILabel!
+    @IBOutlet weak var remainSeatCnt2: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

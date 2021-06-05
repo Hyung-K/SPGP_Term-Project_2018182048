@@ -36,12 +36,17 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
     var remainSeatCnt1 = NSMutableString()
     var remainSeatCnt2 = NSMutableString()
     var routeIdArriv = NSMutableString()
+    
+    var routeIDArriv = NSMutableString()
+    var locationNo1 = NSMutableString()
+    var locationNo2 = NSMutableString()
+    var stationIdArrive = NSMutableString()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         image.image = UIImage(named: "res/back.png")
-        beginXmlFileParsing(category: 2, parameter: "stationId", value: stationID)
+        beginXmlFileParsing(category: -1, parameter: "stationId", value: stationID)
         print("Loading Finish!")
     }
     
@@ -61,7 +66,10 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
     }
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String]) {
+        element = elementName as NSString
         if (elementName as NSString).isEqual(to: "busArrivalList") {
+            elements = NSMutableDictionary()
+            elements = [:]
             plateNo1 = NSMutableString()
             plateNo1 = ""
             plateNo2 = NSMutableString()
@@ -76,6 +84,14 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
             remainSeatCnt2 = ""
             routeIdArriv = NSMutableString()
             routeIdArriv = ""
+            routeIDArriv = NSMutableString()
+            routeIDArriv = ""
+            locationNo1 = NSMutableString()
+            locationNo1 = ""
+            locationNo2 = NSMutableString()
+            locationNo2 = ""
+            stationIdArrive = NSMutableString()
+            stationIdArrive = ""
         }
     }
     
@@ -92,8 +108,14 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
             remainSeatCnt1.append(string)
         } else if element.isEqual(to: "remainSeatCnt2") {
             remainSeatCnt2.append(string)
-        } else if element.isEqual(to: "routeIdArriv") {
+        } else if element.isEqual(to: "routeId") {
             routeIdArriv.append(string)
+        } else if element.isEqual(to: "locationNo1") {
+            locationNo1.append(string)
+        } else if element.isEqual(to: "locationNo2") {
+            locationNo2.append(string)
+        } else if element.isEqual(to: "stationId") {
+            stationIdArrive.append(string)
         }
     }
     
@@ -101,6 +123,7 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
         if (elementName as NSString).isEqual(to: "busArrivalList") {
             if !plateNo1.isEqual(nil) {
                 elements.setObject(plateNo1, forKey: "plateNo1" as NSCopying)
+                print(plateNo1)
             }
             if !plateNo2.isEqual(nil) {
                 elements.setObject(plateNo2, forKey: "plateNo2" as NSCopying)
@@ -118,7 +141,16 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
                 elements.setObject(remainSeatCnt2, forKey: "remainSeatCnt2" as NSCopying)
             }
             if !routeIdArriv.isEqual(nil) {
-                elements.setObject(routeIdArriv, forKey: "routeIdArriv" as NSCopying)
+                elements.setObject(routeIdArriv, forKey: "routeId" as NSCopying)
+            }
+            if !locationNo1.isEqual(nil) {
+                elements.setObject(locationNo1, forKey: "locationNo1" as NSCopying)
+            }
+            if !locationNo2.isEqual(nil) {
+                elements.setObject(locationNo2, forKey: "locationNo2" as NSCopying)
+            }
+            if !stationIdArrive.isEqual(nil) {
+                elements.setObject(stationIdArrive, forKey: "stationId" as NSCopying)
             }
             
             posts.add(elements)
@@ -136,7 +168,17 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
         if currentCategory == 0 {
             secondViewController.locationX = self.locationX
             secondViewController.locationY = self.locationY
+            
+            secondViewController.postsArriv = self.posts
+            secondViewController.elements = self.elements
+            secondViewController.element = self.element
+            
             secondViewController.stationID = self.stationID
+            secondViewController.routeIdArriv = self.routeIdArriv
+            
+            secondViewController.locationNo1 = self.locationNo1
+            secondViewController.locationNo2 = self.locationNo2
+            secondViewController.stationIdArrive = self.stationIdArrive
         } else if currentCategory == 1 {
             secondViewController.routeID = self.routeID
         }
