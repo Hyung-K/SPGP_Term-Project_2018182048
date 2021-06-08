@@ -89,7 +89,8 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
     func beginXMLFileParsing(category: Int, parameter: String, value: NSMutableString) {
         var path = ""
         if category == 0 {
-            path = "http://openapi.gbis.go.kr/ws/rest/busstationservice/route?serviceKey=cOXFXk2qE%2FhuIiYcsMQ4gv032heBUTwuP%2FDQwW0TskxrWGtrdVC6bJPNmJ2CbVcFq6P1eirV9X5d5fql75eeRg%3D%3D&"
+//            path = "http://openapi.gbis.go.kr/ws/rest/busstationservice/route?serviceKey=cOXFXk2qE%2FhuIiYcsMQ4gv032heBUTwuP%2FDQwW0TskxrWGtrdVC6bJPNmJ2CbVcFq6P1eirV9X5d5fql75eeRg%3D%3D&"
+            path = "http://apis.data.go.kr/6410000/busarrivalservice/getBusArrivalList?serviceKey=N7KadYm6hH6H7iDrsgH%2FRlm2zsiTv71hI3m6XH8EUepuvnctJb7UOOlArLFBKS4QFnZxbN%2Fwwa6w6IKtMy%2FbfQ%3D%3D&stationId=200000078"
         } else if category == 1 {
             path = "http://openapi.gbis.go.kr/ws/rest/busrouteservice/station?serviceKey=cOXFXk2qE%2FhuIiYcsMQ4gv032heBUTwuP%2FDQwW0TskxrWGtrdVC6bJPNmJ2CbVcFq6P1eirV9X5d5fql75eeRg%3D%3D&"
         }

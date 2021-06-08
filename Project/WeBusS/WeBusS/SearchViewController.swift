@@ -24,8 +24,10 @@ class SearchViewController: UIViewController, XMLParserDelegate, UITableViewData
     var routeId = NSMutableString()
     
     var currentCategory : Int = 0
-    let busStationPath = "http://openapi.gbis.go.kr/ws/rest/busstationservice?serviceKey=cOXFXk2qE%2FhuIiYcsMQ4gv032heBUTwuP%2FDQwW0TskxrWGtrdVC6bJPNmJ2CbVcFq6P1eirV9X5d5fql75eeRg%3D%3D&"
-    let busListPath = "http://openapi.gbis.go.kr/ws/rest/busrouteservice?serviceKey=cOXFXk2qE%2FhuIiYcsMQ4gv032heBUTwuP%2FDQwW0TskxrWGtrdVC6bJPNmJ2CbVcFq6P1eirV9X5d5fql75eeRg%3D%3D&"
+//    let busStationPath = "http://openapi.gbis.go.kr/ws/rest/busstationservice?serviceKey=cOXFXk2qE%2FhuIiYcsMQ4gv032heBUTwuP%2FDQwW0TskxrWGtrdVC6bJPNmJ2CbVcFq6P1eirV9X5d5fql75eeRg%3D%3D&"
+    let busStationPath = "http://openapi.gbis.go.kr/ws/rest/busstationservice?serviceKey=1234567890&"
+//    let busListPath = "http://openapi.gbis.go.kr/ws/rest/busrouteservice?serviceKey=cOXFXk2qE%2FhuIiYcsMQ4gv032heBUTwuP%2FDQwW0TskxrWGtrdVC6bJPNmJ2CbVcFq6P1eirV9X5d5fql75eeRg%3D%3D&"
+    let busListPath = "http://openapi.gbis.go.kr/ws/rest/busrouteservice?serviceKey=1234567890&"
     
     var timer = Timer()
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ko-kr"))!
