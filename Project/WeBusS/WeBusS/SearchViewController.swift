@@ -96,7 +96,7 @@ class SearchViewController: UIViewController, XMLParserDelegate, UITableViewData
             secondViewController.locationX = (posts.object(at: indexPath!.row) as AnyObject).value(forKey: "x") as! NSString as! NSMutableString
             secondViewController.locationY = (posts.object(at: indexPath!.row) as AnyObject).value(forKey: "y") as! NSString as! NSMutableString
             
-            secondViewController.stationID = (posts.object(at: indexPath!.row) as AnyObject).value(forKey: "stationId") as! NSString as! NSMutableString
+            secondViewController.stationID = (posts.object(at: indexPath!.row) as AnyObject).value(forKey: "stationID") as! NSString as! NSMutableString
         } else if currentCategory == 1 {
             secondViewController.routeID = (posts.object(at: indexPath!.row) as AnyObject).value(forKey: "routeId") as! NSString as! NSMutableString
         }

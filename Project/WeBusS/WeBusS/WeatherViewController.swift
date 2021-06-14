@@ -48,7 +48,12 @@ class WeatherViewController: UIViewController,XMLParserDelegate {
         let (x, y) = converter.convertGrid(lon: locationX.doubleValue, lat: locationY.doubleValue)
         beginXmlFileParsing(numOfRows: String(104), baseData: String(20210605), baseTime: String(0500), nx: String(x), ny: String(y))
 
-
+        let startX: CGFloat = CGFloat(Float.random(in: -400..<400))
+        let startY: CGFloat = 0
+        
+        let stars = StardustView(frame: CGRect(x: startX, y: startY, width: 100, height: 100))
+        self.backgroundImage.addSubview(stars)
+        self.backgroundImage.sendSubviewToBack(_: stars)
     }
     
     func beginXmlFileParsing(numOfRows: String, baseData: String, baseTime: String, nx: String, ny: String) {

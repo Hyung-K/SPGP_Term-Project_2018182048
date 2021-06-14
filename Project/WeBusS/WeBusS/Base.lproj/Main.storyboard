@@ -390,7 +390,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" red="0.84692762310000003" green="0.74009346210000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="mJu-g5-dk6">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="mJu-g5-dk6" customClass="BusInfoTableViewCell" customModule="WeBusS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.333333969116211" width="389" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mJu-g5-dk6" id="gD4-XQ-xAH">
@@ -468,6 +468,15 @@
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="0.84692762310000003" green="0.74009346210000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
+                                            <outlet property="busImage" destination="EEI-QJ-xDs" id="tWQ-Ie-tiJ"/>
+                                            <outlet property="locationNo1" destination="ZGT-Kg-Wk9" id="XFC-py-5W5"/>
+                                            <outlet property="locationNo2" destination="8hg-Mx-zat" id="ydB-fJ-suN"/>
+                                            <outlet property="plateNo" destination="Lr4-Wj-pQV" id="W0p-Xf-cDX"/>
+                                            <outlet property="predictTime1" destination="BEC-tM-ohG" id="3ks-jn-mbS"/>
+                                            <outlet property="predictTime2" destination="N3r-EH-ot1" id="HGS-Ke-8jO"/>
+                                            <outlet property="remainSeatCnt1" destination="U5N-rp-IEz" id="T1L-OV-ByR"/>
+                                            <outlet property="remainSeatCnt2" destination="5Gx-qW-5o7" id="Ay5-jX-Z3b"/>
+                                            <outlet property="titleLabel" destination="YhG-iL-OoD" id="qFm-pd-BpH"/>
                                             <segue destination="anu-QU-a9V" kind="show" id="B0g-0B-gbN"/>
                                         </connections>
                                     </tableViewCell>
@@ -484,11 +493,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="정류장 도착 버스 정보" id="w15-T9-oPx">
-                        <barButtonItem key="leftBarButtonItem" image="arrow.counterclockwise" catalog="system" style="plain" id="J1G-CR-KXU">
-                            <connections>
-                                <segue destination="q6F-c5-PjO" kind="unwind" unwindAction="backwardViewControllerWithSegue:" id="vDm-gF-sPQ"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" image="arrow.counterclockwise" catalog="system" style="plain" id="J1G-CR-KXU"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="sun.max" catalog="system" id="aQh-Tm-Dlz">
                             <connections>
                                 <segue destination="FU7-NL-WVZ" kind="show" id="jwT-VT-CXJ"/>
@@ -501,7 +506,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gzp-gC-E3q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="q6F-c5-PjO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2821.5384615384614" y="861.61137440758284"/>
         </scene>
@@ -524,10 +528,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="잠시만 기다려주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bA-Dp-P2E">
-                                <rect key="frame" x="67" y="250" width="257" height="39"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="화면을 탭하여 도착 정보를 확인하세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bA-Dp-P2E">
+                                <rect key="frame" x="40" y="250" width="311" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>

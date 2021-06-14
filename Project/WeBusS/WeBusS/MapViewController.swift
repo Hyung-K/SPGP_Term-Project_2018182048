@@ -42,7 +42,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func showDirection(_ sender: Any) {
-        let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locationManager.location?.coordinate.latitude ?? 37.3402849, longitude: locationManager.location?.coordinate.longitude ?? 126.7313189)))
+        let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locationManager.location?.coordinate.latitude ?? 37.341237, longitude: locationManager.location?.coordinate.longitude ?? 126.732894)))
         source.name = "출발지"
         
         let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locationY.doubleValue, longitude: locationX.doubleValue)))

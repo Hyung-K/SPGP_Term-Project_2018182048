@@ -19,6 +19,7 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
     var postsArriv = NSMutableArray()
     var elementsArriv = NSMutableDictionary()
     var elementArriv = NSString()
+    var postsBusLocation = NSMutableArray()
     
     var routeName = NSMutableString()
     var routeId = NSMutableString()
@@ -57,9 +58,9 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
         busListTableView.rowHeight = 60
         
         if currentCategory == 0 {
-            beginXMLFileParsing(category: currentCategory, parameter: "stationId", value: stationID)
+            beginXMLFileParsing(category: currentCategory, parameter: "stationID", value: stationID)
         } else if currentCategory == 1 {
-            beginXMLFileParsing(category: currentCategory, parameter: "routeId", value: routeID)
+            beginXMLFileParsing(category: currentCategory, parameter: "routeID", value: routeID)
         }
     }
     
@@ -89,10 +90,10 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
     func beginXMLFileParsing(category: Int, parameter: String, value: NSMutableString) {
         var path = ""
         if category == 0 {
-//            path = "http://openapi.gbis.go.kr/ws/rest/busstationservice/route?serviceKey=cOXFXk2qE%2FhuIiYcsMQ4gv032heBUTwuP%2FDQwW0TskxrWGtrdVC6bJPNmJ2CbVcFq6P1eirV9X5d5fql75eeRg%3D%3D&"
-            path = "http://apis.data.go.kr/6410000/busarrivalservice/getBusArrivalList?serviceKey=N7KadYm6hH6H7iDrsgH%2FRlm2zsiTv71hI3m6XH8EUepuvnctJb7UOOlArLFBKS4QFnZxbN%2Fwwa6w6IKtMy%2FbfQ%3D%3D&stationId=200000078"
+            path = "http://openapi.gbis.go.kr/ws/rest/busstationservice/route?serviceKey=1234567890&"
+
         } else if category == 1 {
-            path = "http://openapi.gbis.go.kr/ws/rest/busrouteservice/station?serviceKey=cOXFXk2qE%2FhuIiYcsMQ4gv032heBUTwuP%2FDQwW0TskxrWGtrdVC6bJPNmJ2CbVcFq6P1eirV9X5d5fql75eeRg%3D%3D&"
+            path = "http://openapi.gbis.go.kr/ws/rest/busrouteservice/station?serviceKey=1234567890&"
         }
         
         let quaryURL = path + parameter + "=" + String(value)
@@ -196,7 +197,7 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! BusInformationTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! BusInfoTableViewCell
         
         if currentCategory == 0 {
             cell.titleLabel.text = (posts.object(at: indexPath.row) as AnyObject).value(forKey: "routeName") as! NSString as String
@@ -255,6 +256,24 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
             
             cell.titleLabel.text = (posts.object(at: indexPath.row) as AnyObject).value(forKey: "stationName") as! NSString as String
             cell.busImage.image = UIImage(named: "res/grayBus.png")
+            
+            for i in 0..<postsBusLocation.count {
+                if((posts.object(at: indexPath.row) as AnyObject).value(forKey: "stationId") as! NSString == (postsBusLocation[i] as AnyObject).value(forKey: "stationId") as! NSString as! NSMutableString) {
+                    cell.busImage.isHidden = false
+                    cell.busImage.image = UIImage(named:"res/monster.png")
+                    
+                    let tempPlateNo = (postsBusLocation[i] as AnyObject).value(forKey: "plateNo") as! NSString as! NSMutableString as String
+                    cell.plateNo.text = String("\(tempPlateNo)")
+                    
+                    let tempRemainSeat = (postsBusLocation[i] as AnyObject).value(forKey: "remainSeatCnt") as! NSString as! NSMutableString as String
+                    cell.remainSeatCnt.text = String("잔여석: \(tempRemainSeat)")
+                } else {
+                    cell.busImage.isHidden = true
+                    cell.plateNo.text = String("")
+                    cell.remainSeatCnt.text = String("")
+                }
+            }
+            cell.titleLabel.text = (posts.object(at: indexPath.row) as AnyObject).value(forKey: "stationName") as! NSString as String
         }
         return cell
     }
