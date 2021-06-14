@@ -9,7 +9,6 @@ import UIKit
 
 class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    var currentCategory : Int = 0
     
     var parser = XMLParser()
     var posts = NSMutableArray()
@@ -19,32 +18,41 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
     var postsArriv = NSMutableArray()
     var elementsArriv = NSMutableDictionary()
     var elementArriv = NSString()
+    
     var postsBusLocation = NSMutableArray()
     
+    // category == 0
     var routeName = NSMutableString()
     var routeId = NSMutableString()
     var routeTypeName = NSMutableString()
+
+    var stationSeq = NSMutableString()
+    var stationId = NSMutableString()
     
-    var stationID = NSMutableString()
+    var currentCategory : Int = 0
+
+    var stationName = NSMutableString()
+    
     var locationX = NSMutableString()
     var locationY = NSMutableString()
-   
-    var routeID = NSMutableString()
-    var stationName = NSMutableString()
-    var stationSeq = NSMutableString()
     
+    // category == 1
+    var routeID = NSMutableString()
+    var stationSeqPre = NSMutableString()
+    var plateNo = NSMutableString()
+    var plateType = NSMutableString()
+    var remainSeatCnt = NSMutableString()
+    
+    // category == 2
+    var stationIDPre = NSMutableString()
     var plateNo1 = NSMutableString()
     var plateNo2 = NSMutableString()
     var predictTime1 = NSMutableString()
     var predictTime2 = NSMutableString()
     var remainSeatCnt1 = NSMutableString()
     var remainSeatCnt2 = NSMutableString()
-    var routeIdArriv = NSMutableString()
-    
-    var locationNo1 = NSMutableString()
-    var locationNo2 = NSMutableString()
-    var stationIdArrive = NSMutableString()
-    
+    var routeIdArrive = NSMutableString()
+
     @IBOutlet weak var busListTableView: UITableView!
     
     @IBAction func backwardViewController(segue: UIStoryboardSegue){
@@ -58,9 +66,9 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
         busListTableView.rowHeight = 60
         
         if currentCategory == 0 {
-            beginXMLFileParsing(category: currentCategory, parameter: "stationID", value: stationID)
+            beginXMLFileParsing(category: currentCategory, parameter: "stationId", value: stationIDPre)
         } else if currentCategory == 1 {
-            beginXMLFileParsing(category: currentCategory, parameter: "routeID", value: routeID)
+            beginXMLFileParsing(category: currentCategory, parameter: "routeId", value: routeID)
         }
     }
     
@@ -90,7 +98,7 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
     func beginXMLFileParsing(category: Int, parameter: String, value: NSMutableString) {
         var path = ""
         if category == 0 {
-            path = "http://openapi.gbis.go.kr/ws/rest/busstationservice/route?serviceKey=1234567890&"
+            path = "http://openapi.gbis.go.kr/ws/rest/busstationservice/route?serviceKey=1234567890&" //stationId=233001450
 
         } else if category == 1 {
             path = "http://openapi.gbis.go.kr/ws/rest/busrouteservice/station?serviceKey=1234567890&"
@@ -150,7 +158,7 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
                 routeName.append(string)
             } else if element.isEqual(to: "routeTypeName") {
                 routeTypeName.append(string)
-            } else if element.isEqual(to: "routeId") {
+            } else if element.isEqual(to: "routeID") {
                 routeId.append(string)
             }
         } else if currentCategory == 1 {
@@ -162,6 +170,8 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
                 locationX.append(string)
             } else if element.isEqual(to: "y") {
                 locationY.append(string)
+            } else if element.isEqual(to: "stationID") {
+                stationId.append(string)
             }
         }
     }
@@ -190,6 +200,9 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
             }
             if !locationY.isEqual(nil) {
                 elements.setObject(locationY, forKey: "y" as NSCopying)
+            }
+            if !stationId.isEqual(nil) {
+                elements.setObject(stationId, forKey: "stationID" as NSCopying)
             }
             
             posts.add(elements)
@@ -255,20 +268,33 @@ class BusInfoViewController: UIViewController, XMLParserDelegate, UITableViewDat
             cell.remainSeatCnt2.isHidden = true
             
             cell.titleLabel.text = (posts.object(at: indexPath.row) as AnyObject).value(forKey: "stationName") as! NSString as String
-            cell.busImage.image = UIImage(named: "res/grayBus.png")
+//            cell.busImage.image = UIImage(named: "res/grayBus.png")
             
             for i in 0..<postsBusLocation.count {
-                if((posts.object(at: indexPath.row) as AnyObject).value(forKey: "stationId") as! NSString == (postsBusLocation[i] as AnyObject).value(forKey: "stationId") as! NSString as! NSMutableString) {
+                if((posts.object(at: indexPath.row) as AnyObject).value(forKey: "stationID") as! NSString == (postsBusLocation[i] as AnyObject).value(forKey: "stationID") as! NSString as! NSMutableString) {
+                    cell.defaultImage.isHidden = true
                     cell.busImage.isHidden = false
-                    cell.busImage.image = UIImage(named:"res/monster.png")
+                    cell.busImage.image = UIImage(named:"res/not_found.png")
+                    
+                    UIView.animate(withDuration: 0.8, animations: {
+                        let rotation = CGAffineTransform(rotationAngle: CGFloat((Double.random(in: -0.5..<0.5)) * Double.pi))
+                        let transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+                        cell.busImage.transform = rotation.concatenating(transform)
+                    }) {(_) in
+                        UIView.animate(withDuration: 0.8, animations: {
+                            cell.busImage.transform = CGAffineTransform.identity
+                        })
+                    }
                     
                     let tempPlateNo = (postsBusLocation[i] as AnyObject).value(forKey: "plateNo") as! NSString as! NSMutableString as String
                     cell.plateNo.text = String("\(tempPlateNo)")
                     
                     let tempRemainSeat = (postsBusLocation[i] as AnyObject).value(forKey: "remainSeatCnt") as! NSString as! NSMutableString as String
-                    cell.remainSeatCnt.text = String("잔여석: \(tempRemainSeat)")
+                    cell.remainSeatCnt.text = String("잔여석: \(tempRemainSeat)석")
                 } else {
+                    cell.defaultImage.isHidden = false
                     cell.busImage.isHidden = true
+                    cell.defaultImage.image = UIImage(named: "res/road.png")
                     cell.plateNo.text = String("")
                     cell.remainSeatCnt.text = String("")
                 }

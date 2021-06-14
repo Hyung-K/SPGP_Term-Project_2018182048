@@ -15,6 +15,7 @@ class BusInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var predictTime2: UILabel!
     @IBOutlet weak var remainSeatCnt: UILabel!
     @IBOutlet weak var busImage: UIImageView!
+    @IBOutlet weak var defaultImage: UIImageView!
     @IBOutlet weak var plateNo: UILabel!
     @IBOutlet weak var remainSeatCnt1: UILabel!
     @IBOutlet weak var remainSeatCnt2: UILabel!

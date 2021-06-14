@@ -16,7 +16,7 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
     var element = NSString()
     
     var routeName = NSMutableString()
-    var routeId = NSMutableString()
+//    var routeId = NSMutableString()
     var routeTypeName = NSMutableString()
     
     var stationID = NSMutableString()
@@ -25,10 +25,11 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
     
     var currentCategory : Int = 0
     
-    var routeID = NSMutableString()
-    var staionName = NSMutableString()
-    var stationSeq = NSMutableString()
+//    var routeID = NSMutableString()
+//    var staionName = NSMutableString()
+//    var stationSeq = NSMutableString()
     
+    // category == 0
     var plateNo1 = NSMutableString()
     var plateNo2 = NSMutableString()
     var predictTime1 = NSMutableString()
@@ -42,21 +43,41 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
     var locationNo2 = NSMutableString()
     var stationIdArrive = NSMutableString()
 
+    // category == 1
+    var routeID = NSMutableString()
+    var stationSeq = NSMutableString()
+    var plateNo = NSMutableString()
+    var plateType = NSMutableString()
+    var remainSeatCnt = NSMutableString()
+    var stationId = NSMutableString()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         image.image = UIImage(named: "res/back.png")
-        beginXmlFileParsing(category: -1, parameter: "stationId", value: stationID)
+        if currentCategory == 0 {
+            beginXmlFileParsing(category: 0, parameter: "stationID", value: stationID)
+        } else if currentCategory == 1 {
+            beginXmlFileParsing(category: 1, parameter: "routeID", value: routeID)
+        }
         print("Loading Finish!")
     }
     
     func beginXmlFileParsing(category: Int, parameter: String, value: NSMutableString) {
         var path = ""
-        path = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice/station?serviceKey=1234567890&stationId=200000078"
+        
+        if category == 0 {
+            path = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice/station?serviceKey=1234567890&stationId=200000078"
+        } else if category == 1 {
+            path = "http://openapi.gbis.go.kr/ws/rest/buslocationservice?serviceKey=1234567890&stationId=200000078"
+        }
+        
         let quaryURL = path + parameter + "=" + String(value)
         
         posts = []
         parser = XMLParser(contentsOf: (URL(string: quaryURL))!)!
+        parser.delegate = self
+        
         let success:Bool = parser.parse()
         if success {
             print("Loading Parsing Success!")
@@ -92,30 +113,61 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
             locationNo2 = ""
             stationIdArrive = NSMutableString()
             stationIdArrive = ""
+        } else if (elementName as NSString).isEqual(to: "busLocationList") {
+            elements = NSMutableDictionary()
+            elements = [:]
+            stationSeq = NSMutableString()
+            stationSeq = ""
+            plateNo = NSMutableString()
+            plateNo = ""
+            plateType = NSMutableString()
+            plateType = ""
+            remainSeatCnt = NSMutableString()
+            remainSeatCnt = ""
+            stationId = NSMutableString()
+            stationId = ""
         }
     }
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        if element.isEqual(to: "plateNo1") {
-            plateNo1.append(string)
-        } else if element.isEqual(to: "plateNo2") {
-            plateNo2.append(string)
-        } else if element.isEqual(to: "predictTime1") {
-            predictTime1.append(string)
-        } else if element.isEqual(to: "predictTime2") {
-            predictTime2.append(string)
-        } else if element.isEqual(to: "remainSeatCnt1") {
-            remainSeatCnt1.append(string)
-        } else if element.isEqual(to: "remainSeatCnt2") {
-            remainSeatCnt2.append(string)
-        } else if element.isEqual(to: "routeId") {
-            routeIdArriv.append(string)
-        } else if element.isEqual(to: "locationNo1") {
-            locationNo1.append(string)
-        } else if element.isEqual(to: "locationNo2") {
-            locationNo2.append(string)
-        } else if element.isEqual(to: "stationId") {
-            stationIdArrive.append(string)
+        if currentCategory == 0 {
+            if element.isEqual(to: "plateNo1") {
+                plateNo1.append(string)
+            } else if element.isEqual(to: "plateNo2") {
+                plateNo2.append(string)
+            } else if element.isEqual(to: "predictTime1") {
+                predictTime1.append(string)
+            } else if element.isEqual(to: "predictTime2") {
+                predictTime2.append(string)
+            } else if element.isEqual(to: "remainSeatCnt1") {
+                remainSeatCnt1.append(string)
+            } else if element.isEqual(to: "remainSeatCnt2") {
+                remainSeatCnt2.append(string)
+            } else if element.isEqual(to: "routeId") {
+                routeIdArriv.append(string)
+            } else if element.isEqual(to: "locationNo1") {
+                locationNo1.append(string)
+            } else if element.isEqual(to: "locationNo2") {
+                locationNo2.append(string)
+            } else if element.isEqual(to: "stationId") {
+                stationIdArrive.append(string)
+            }
+        } else if currentCategory == 1 {
+            if element.isEqual(to: "stationSeq"){
+                stationSeq.append(string)
+            }
+            else if element.isEqual(to: "plateNo"){
+                plateNo.append(string)
+            }
+            else if element.isEqual(to: "plateType"){
+                plateType.append(string)
+            }
+            else if element.isEqual(to: "remainSeatCnt"){
+                remainSeatCnt.append(string)
+            }
+            else if element.isEqual(to: "stationID"){
+                stationId.append(string)
+            }
         }
     }
     
@@ -154,6 +206,23 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
             }
             
             posts.add(elements)
+        } else if (elementName as NSString).isEqual(to: "busLocationList") {
+            if !stationSeq.isEqual(nil) {
+                elements.setObject(stationSeq, forKey: "stationSeq" as NSCopying)
+            }
+            if !plateNo.isEqual(nil) {
+                elements.setObject(plateNo, forKey: "plateNo" as NSCopying)
+            }
+            if !plateType.isEqual(nil) {
+                elements.setObject(plateType, forKey: "plateType" as NSCopying)
+            }
+            if !remainSeatCnt.isEqual(nil) {
+                elements.setObject(remainSeatCnt, forKey: "remainSeatCnt" as NSCopying)
+            }
+            if !stationId.isEqual(nil) {
+                elements.setObject(stationId, forKey: "stationId" as NSCopying)
+            }
+            posts.add(elements)
         }
     }
     
@@ -163,7 +232,7 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
         }
         
         secondViewController.currentCategory = self.currentCategory
-        secondViewController.stationID = self.stationID
+//        secondViewController.stationIDPre = self.stationID
         
         if currentCategory == 0 {
             secondViewController.locationX = self.locationX
@@ -173,14 +242,16 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
             secondViewController.elements = self.elements
             secondViewController.element = self.element
             
-            secondViewController.stationID = self.stationID
-            secondViewController.routeIdArriv = self.routeIdArriv
-            
-            secondViewController.locationNo1 = self.locationNo1
-            secondViewController.locationNo2 = self.locationNo2
-            secondViewController.stationIdArrive = self.stationIdArrive
+            secondViewController.stationIDPre = self.stationID
+            secondViewController.routeIdArrive = self.routeIdArriv
         } else if currentCategory == 1 {
             secondViewController.routeID = self.routeID
+            secondViewController.stationSeqPre = self.stationSeq
+            secondViewController.plateNo = self.plateNo
+            secondViewController.plateType = self.plateType
+            secondViewController.remainSeatCnt = self.remainSeatCnt
+            secondViewController.stationIDPre = self.stationId
+            secondViewController.postsBusLocation = self.posts
         }
     }
 }

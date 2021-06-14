@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import SwiftUI
 
 class WeatherViewController: UIViewController,XMLParserDelegate {
 
+    @IBSegueAction func weatherChartAction(_ coder: NSCoder) -> UIViewController {
+        return UIHostingController(coder: coder, rootView: LineChartView(data: [10,23,20,32,12,34,7,23,43], title: "Weekly Weather", legend: "").environment(\.colorScheme, .light))!
+    }
+    
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var PopLabel: UILabel!
@@ -26,12 +31,17 @@ class WeatherViewController: UIViewController,XMLParserDelegate {
     
     var category = NSMutableString()
     var fcstValue = NSMutableString()
+    var fcstDate = NSMutableString()
+    var fcstTime = NSMutableString()
+    
     var locationX = NSMutableString()
     var locationY = NSMutableString()
     
     let converter = LamberProjection()
     
     var currentDate : String = ""
+    var currentTime : String = ""
+    
     var skyCondition : Int = -1
     var vecValue : Int = -1
     var wsdValue : Double = -1.0
@@ -46,7 +56,7 @@ class WeatherViewController: UIViewController,XMLParserDelegate {
         currentDate = formatter.string(from: Date())
         
         let (x, y) = converter.convertGrid(lon: locationX.doubleValue, lat: locationY.doubleValue)
-        beginXmlFileParsing(numOfRows: String(104), baseData: String(20210605), baseTime: String(0500), nx: String(x), ny: String(y))
+        beginXmlFileParsing(numOfRows: String(104), baseData: String(20210614), baseTime: String(0500), nx: String(x), ny: String(y))
 
         let startX: CGFloat = CGFloat(Float.random(in: -400..<400))
         let startY: CGFloat = 0
@@ -100,6 +110,29 @@ class WeatherViewController: UIViewController,XMLParserDelegate {
         // listTableView!.reloadData()
     }
     
+    func getBaseTime(time: Int) -> String {
+        if 0 < time && time < 0210 {
+            return "0000"
+        } else if 0210 <= time && time < 0510 {
+            return "0200"
+        } else if 0510 <= time && time < 0810 {
+            return "0500"
+        } else if 0810 <= time && time < 1110 {
+            return "0800"
+        } else if 1110 <= time && time < 1410 {
+            return "1100"
+        } else if 1410 <= time && time < 1710 {
+            return "1400"
+        } else if 1710 <= time && time < 2010 {
+            return "1700"
+        } else if 2010 <= time && time < 2310 {
+            return "2000"
+        } else if 2310 <= time {
+            return "2300"
+        }
+        return ""
+    }
+    
     func setSkyImage(condition: Int) {
         switch condition {
         case 1:
@@ -113,7 +146,6 @@ class WeatherViewController: UIViewController,XMLParserDelegate {
             break
         default:
             break
-            
         }
     }
     
@@ -183,6 +215,10 @@ class WeatherViewController: UIViewController,XMLParserDelegate {
             category = ""
             fcstValue = NSMutableString()
             fcstValue = ""
+            fcstDate = NSMutableString()
+            fcstDate = ""
+            fcstTime = NSMutableString()
+            fcstTime = ""
         }
     }
     
@@ -191,20 +227,30 @@ class WeatherViewController: UIViewController,XMLParserDelegate {
             category.append(string)
         } else if element.isEqual(to: "fcstValue") {
             fcstValue.append(string)
+        } else if element.isEqual(to: "fcstDate") {
+            fcstDate.append(string)
+        } else if element.isEqual(to: "fcstTime") {
+            fcstTime.append(string)
         }
     }
     
-//    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI namspaceURI: String?, qualifiedName qName: String?) {
-//        if (elementName as NSString).isEqual(to: "item") {
-//            if !category.isEqual(nil) {
-//                elements.setObject(category, forKey: "category" as NSCopying)
-//            }
-//            if !fcstValue.isEqual(nil) {
-//                elements.setObject(fcstValue, forKey: "fcstValue" as NSCopying)
-//            }
-//            posts.add(elements)
-//        }
-//    }
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI namspaceURI: String?, qualifiedName qName: String?) {
+        if (elementName as NSString).isEqual(to: "item") {
+            if !category.isEqual(nil) {
+                elements.setObject(category, forKey: "category" as NSCopying)
+            }
+            if !fcstValue.isEqual(nil) {
+                elements.setObject(fcstValue, forKey: "fcstValue" as NSCopying)
+            }
+            if !fcstDate.isEqual(nil) {
+                elements.setObject(fcstDate, forKey: "fcstDate" as NSCopying)
+            }
+            if !fcstTime.isEqual(nil) {
+                elements.setObject(fcstTime, forKey: "fcstTime" as NSCopying)
+            }
+            posts.add(elements)
+        }
+    }
 //
 //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return posts.count

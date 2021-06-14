@@ -17,6 +17,16 @@
 		0D39A7EB2657B930007AF486 /* BusInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D39A7EA2657B930007AF486 /* BusInfoViewController.swift */; };
 		0D788FF02671DE8200B4A3B7 /* ParticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D788FEF2671DE8200B4A3B7 /* ParticleView.swift */; };
 		0D788FF22671E28400B4A3B7 /* StardustView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D788FF12671E28400B4A3B7 /* StardustView.swift */; };
+		0D9B59BE2677AF9400E84368 /* ExplodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9B59BD2677AF9400E84368 /* ExplodeView.swift */; };
+		0D9B59CD2677BA6D00E84368 /* MultiLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9B59C42677BA6C00E84368 /* MultiLineChartView.swift */; };
+		0D9B59CE2677BA6D00E84368 /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9B59C52677BA6C00E84368 /* IndicatorPoint.swift */; };
+		0D9B59CF2677BA6D00E84368 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9B59C62677BA6C00E84368 /* LineChartView.swift */; };
+		0D9B59D02677BA6D00E84368 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9B59C72677BA6C00E84368 /* Line.swift */; };
+		0D9B59D12677BA6D00E84368 /* Path+QuadCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9B59C82677BA6C00E84368 /* Path+QuadCurve.swift */; };
+		0D9B59D22677BA6D00E84368 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9B59C92677BA6C00E84368 /* Helpers.swift */; };
+		0D9B59D32677BA6D00E84368 /* Legend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9B59CA2677BA6D00E84368 /* Legend.swift */; };
+		0D9B59D42677BA6D00E84368 /* MagnifierRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9B59CB2677BA6D00E84368 /* MagnifierRect.swift */; };
+		0D9B59D52677BA6D00E84368 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9B59CC2677BA6D00E84368 /* LineView.swift */; };
 		0DA6803C266B4F430040D9FE /* LamberProjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA6803B266B4F430040D9FE /* LamberProjection.swift */; };
 		0DE3B40F266F4E2E00BD72A4 /* BusInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE3B40E266F4E2E00BD72A4 /* BusInfoTableViewCell.swift */; };
 		0DEBE36F266BA80900E03B61 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 0DEBE36E266BA80900E03B61 /* res */; };
@@ -38,6 +48,16 @@
 		0D39A7EA2657B930007AF486 /* BusInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusInfoViewController.swift; sourceTree = "<group>"; };
 		0D788FEF2671DE8200B4A3B7 /* ParticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleView.swift; sourceTree = "<group>"; };
 		0D788FF12671E28400B4A3B7 /* StardustView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StardustView.swift; sourceTree = "<group>"; };
+		0D9B59BD2677AF9400E84368 /* ExplodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplodeView.swift; sourceTree = "<group>"; };
+		0D9B59C42677BA6C00E84368 /* MultiLineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiLineChartView.swift; path = Chart/MultiLineChartView.swift; sourceTree = "<group>"; };
+		0D9B59C52677BA6C00E84368 /* IndicatorPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IndicatorPoint.swift; path = Chart/IndicatorPoint.swift; sourceTree = "<group>"; };
+		0D9B59C62677BA6C00E84368 /* LineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineChartView.swift; path = Chart/LineChartView.swift; sourceTree = "<group>"; };
+		0D9B59C72677BA6C00E84368 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Line.swift; path = Chart/Line.swift; sourceTree = "<group>"; };
+		0D9B59C82677BA6C00E84368 /* Path+QuadCurve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Path+QuadCurve.swift"; path = "Chart/Path+QuadCurve.swift"; sourceTree = "<group>"; };
+		0D9B59C92677BA6C00E84368 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helpers.swift; path = Chart/Helpers.swift; sourceTree = "<group>"; };
+		0D9B59CA2677BA6D00E84368 /* Legend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Legend.swift; path = Chart/Legend.swift; sourceTree = "<group>"; };
+		0D9B59CB2677BA6D00E84368 /* MagnifierRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MagnifierRect.swift; path = Chart/MagnifierRect.swift; sourceTree = "<group>"; };
+		0D9B59CC2677BA6D00E84368 /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineView.swift; path = Chart/LineView.swift; sourceTree = "<group>"; };
 		0DA6803B266B4F430040D9FE /* LamberProjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LamberProjection.swift; sourceTree = "<group>"; };
 		0DE3B40E266F4E2E00BD72A4 /* BusInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusInfoTableViewCell.swift; sourceTree = "<group>"; };
 		0DEBE36E266BA80900E03B61 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
@@ -76,6 +96,7 @@
 		0D142501264A689B00DED8D5 /* WeBusS */ = {
 			isa = PBXGroup;
 			children = (
+				0D9B59C12677BA1B00E84368 /* Chart */,
 				0DEBE36E266BA80900E03B61 /* res */,
 				0D142502264A689B00DED8D5 /* AppDelegate.swift */,
 				0D142504264A689B00DED8D5 /* SceneDelegate.swift */,
@@ -93,8 +114,25 @@
 				0DEBE374266BC5DB00E03B61 /* LoadingViewController.swift */,
 				0D788FEF2671DE8200B4A3B7 /* ParticleView.swift */,
 				0D788FF12671E28400B4A3B7 /* StardustView.swift */,
+				0D9B59BD2677AF9400E84368 /* ExplodeView.swift */,
 			);
 			path = WeBusS;
+			sourceTree = "<group>";
+		};
+		0D9B59C12677BA1B00E84368 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				0D9B59C92677BA6C00E84368 /* Helpers.swift */,
+				0D9B59C52677BA6C00E84368 /* IndicatorPoint.swift */,
+				0D9B59CA2677BA6D00E84368 /* Legend.swift */,
+				0D9B59C72677BA6C00E84368 /* Line.swift */,
+				0D9B59C62677BA6C00E84368 /* LineChartView.swift */,
+				0D9B59CC2677BA6D00E84368 /* LineView.swift */,
+				0D9B59CB2677BA6D00E84368 /* MagnifierRect.swift */,
+				0D9B59C42677BA6C00E84368 /* MultiLineChartView.swift */,
+				0D9B59C82677BA6C00E84368 /* Path+QuadCurve.swift */,
+			);
+			name = Chart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,18 +206,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D9B59BE2677AF9400E84368 /* ExplodeView.swift in Sources */,
+				0D9B59D22677BA6D00E84368 /* Helpers.swift in Sources */,
 				0D142507264A689B00DED8D5 /* ViewController.swift in Sources */,
+				0D9B59D02677BA6D00E84368 /* Line.swift in Sources */,
 				0DA6803C266B4F430040D9FE /* LamberProjection.swift in Sources */,
+				0D9B59CF2677BA6D00E84368 /* LineChartView.swift in Sources */,
+				0D9B59D32677BA6D00E84368 /* Legend.swift in Sources */,
+				0D9B59CD2677BA6D00E84368 /* MultiLineChartView.swift in Sources */,
 				0D788FF22671E28400B4A3B7 /* StardustView.swift in Sources */,
+				0D9B59D42677BA6D00E84368 /* MagnifierRect.swift in Sources */,
 				0DF177E8265C16C80053CD75 /* MapViewController.swift in Sources */,
 				0D39A7EB2657B930007AF486 /* BusInfoViewController.swift in Sources */,
 				0D142503264A689B00DED8D5 /* AppDelegate.swift in Sources */,
 				0DF177EA265CD9CA0053CD75 /* WeatherViewController.swift in Sources */,
 				0DEBE375266BC5DB00E03B61 /* LoadingViewController.swift in Sources */,
 				0DE3B40F266F4E2E00BD72A4 /* BusInfoTableViewCell.swift in Sources */,
+				0D9B59D52677BA6D00E84368 /* LineView.swift in Sources */,
 				0D142517264E333300DED8D5 /* SearchViewController.swift in Sources */,
 				0D788FF02671DE8200B4A3B7 /* ParticleView.swift in Sources */,
+				0D9B59D12677BA6D00E84368 /* Path+QuadCurve.swift in Sources */,
 				0D142505264A689B00DED8D5 /* SceneDelegate.swift in Sources */,
+				0D9B59CE2677BA6D00E84368 /* IndicatorPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="G7u-sC-Iu9">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment version="4864" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,6 +14,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="G7u-sC-Iu9" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="jst-kl-u3a"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Hcj-fS-fd3">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -187,7 +189,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                     </view>
-                    <navigationItem key="navigationItem" id="aSY-BO-q70"/>
+                    <navigationItem key="navigationItem" title="화면을 탭하여 실행하세요" id="aSY-BO-q70"/>
                     <connections>
                         <outlet property="LogoImageView" destination="FCF-eb-New" id="nJW-U2-v6g"/>
                     </connections>
@@ -196,10 +198,11 @@
                 <tapGestureRecognizer id="gWu-lc-88c">
                     <connections>
                         <action selector="logoTappedWithSender:" destination="08q-9t-lds" id="d4R-2f-TId"/>
+                        <outlet property="delegate" destination="qEv-UF-Ofk" id="pWv-xw-hk0"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="854" y="-648"/>
+            <point key="canvasLocation" x="869" y="-648"/>
         </scene>
         <!--Map-->
         <scene sceneID="grW-L4-wRB">
@@ -464,11 +467,16 @@
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gD7-Kr-6yp" userLabel="Default Image">
+                                                    <rect key="frame" x="3" y="5" width="61" height="33"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="0.84692762310000003" green="0.74009346210000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="busImage" destination="EEI-QJ-xDs" id="tWQ-Ie-tiJ"/>
+                                            <outlet property="defaultImage" destination="gD7-Kr-6yp" id="Uqu-qi-idW"/>
                                             <outlet property="locationNo1" destination="ZGT-Kg-Wk9" id="XFC-py-5W5"/>
                                             <outlet property="locationNo2" destination="8hg-Mx-zat" id="ydB-fJ-suN"/>
                                             <outlet property="plateNo" destination="Lr4-Wj-pQV" id="W0p-Xf-cDX"/>
@@ -493,7 +501,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="정류장 도착 버스 정보" id="w15-T9-oPx">
-                        <barButtonItem key="leftBarButtonItem" image="arrow.counterclockwise" catalog="system" style="plain" id="J1G-CR-KXU"/>
+                        <barButtonItem key="leftBarButtonItem" image="arrow.counterclockwise" catalog="system" style="plain" id="J1G-CR-KXU">
+                            <connections>
+                                <segue destination="oKe-1W-4zg" kind="unwind" unwindAction="backwardViewControllerWithSegue:" id="JOa-Fj-kSU"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="sun.max" catalog="system" id="aQh-Tm-Dlz">
                             <connections>
                                 <segue destination="FU7-NL-WVZ" kind="show" id="jwT-VT-CXJ"/>
@@ -506,6 +518,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gzp-gC-E3q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="oKe-1W-4zg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2821.5384615384614" y="861.61137440758284"/>
         </scene>

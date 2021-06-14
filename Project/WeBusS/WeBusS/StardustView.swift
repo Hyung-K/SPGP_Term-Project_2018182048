@@ -35,15 +35,20 @@ class StardustView: UIView {
         let texture: UIImage? = UIImage(named: "res/p_snow")
         assert(texture != nil, "particle Image not found")
         
+        let emitterCell = CAEmitterCell()
+        
+        emitterCell.name = "cell"
+        emitterCell.contents = texture?.cgImage
+        emitterCell.birthRate = 100
+        emitterCell.lifetime = 5.0
+        emitterCell.yAcceleration = 10
+        emitterCell.scaleRange = 0.5
+        emitterCell.scaleSpeed = -0.2
+        emitterCell.emissionRange = 0.0
+        emitter.emitterCells = [emitterCell]
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+            self.removeFromSuperview()
+        })
     }
-
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }
