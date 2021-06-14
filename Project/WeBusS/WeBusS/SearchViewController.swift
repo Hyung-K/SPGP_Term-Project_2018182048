@@ -107,7 +107,6 @@ class SearchViewController: UIViewController, XMLParserDelegate, UITableViewData
         let quaryURL = path + parameter + "=" + valueEncoding
         
         posts = []
-//        parser = XMLParser(contentsOf: (URL(string: "https://openapi.gg.go.kr/BusStation?ServiceKey=6b722c447ca0430db1c15b6c0a08c4dd" ))!)!
         parser = XMLParser(contentsOf: (URL(string: quaryURL ))!)!
         parser.delegate = self
         

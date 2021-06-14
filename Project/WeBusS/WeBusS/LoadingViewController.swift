@@ -16,7 +16,6 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
     var element = NSString()
     
     var routeName = NSMutableString()
-//    var routeId = NSMutableString()
     var routeTypeName = NSMutableString()
     
     var stationID = NSMutableString()
@@ -24,10 +23,6 @@ class LoadingViewController: UIViewController, XMLParserDelegate {
     var locationY = NSMutableString()
     
     var currentCategory : Int = 0
-    
-//    var routeID = NSMutableString()
-//    var staionName = NSMutableString()
-//    var stationSeq = NSMutableString()
     
     // category == 0
     var plateNo1 = NSMutableString()

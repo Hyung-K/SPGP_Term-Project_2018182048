@@ -107,7 +107,6 @@ class WeatherViewController: UIViewController,XMLParserDelegate {
         setSkyImage(condition: skyCondition)
         setVec(vec: vecValue)
         setWsd(wsd: wsdValue)
-        // listTableView!.reloadData()
     }
     
     func getBaseTime(time: Int) -> String {
@@ -251,14 +250,4 @@ class WeatherViewController: UIViewController,XMLParserDelegate {
             posts.add(elements)
         }
     }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return posts.count
-//    }
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard let secondViewController = segue.destination as? BusInfoViewController else {
-//            return
-//        }
-//    }
 }
